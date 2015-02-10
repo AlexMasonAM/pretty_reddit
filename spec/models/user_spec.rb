@@ -19,7 +19,7 @@ RSpec.describe User, :type => :model do
   end
 
   it 'is invalid if email is not formatted properly' do
-    user = FactoryGirl.build(:user, email: 'asdfgh')
+    user.email = 'asdfgh'
     expect(user).to be_invalid
   end
 
@@ -33,6 +33,26 @@ RSpec.describe User, :type => :model do
     expect(user1).to be_invalid
     expect(user2).to be_invalid
   end
+  
+  it 'should require password confirmation' do
+    
+    user = FactoryGirl.create(:user)
+    user.password_confirmation = nil
+    expect(user).to be_invalid
+  end
 
+  it 'should confirm password' do
+    
+    user = FactoryGirl.create(:user)
+    user.password = "a" * 8
+    user.password_confirmation = "bbbbbbbb"
+    expect(user).to be_invalid
+  end
+  it 'should have a minimum length of 6 characters for password' do
+    
+    user = FactoryGirl.create(:user)
+    user.password = user.password_confirmation = "a" * 5
+    expect(user).to be_invalid
+  end
 
 end
