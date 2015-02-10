@@ -5,7 +5,7 @@ class Api::PostsController < ApplicationController
            except: [:updated_at, :created_at], 
            include: {
                       comments: { except: [:updated_at, :user_id, :post_id]}
-                      users:    { except: [:updated_at, :password_digest]}
+                      # users:    { except: [:updated_at, :password_digest]}
                     }
   end
 end

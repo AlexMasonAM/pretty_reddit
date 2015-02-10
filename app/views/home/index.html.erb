@@ -2,3 +2,9 @@
 <p>Find me in app/views/home/index.html.erb</p>
 
   {{6 * 7}}
+
+<div ng-controller="postsController">
+  <div ng-repeat="post in posts">
+    <a ng-href="{{ post.link }}" ng-bind="post.title"></a>
+  </div>
+</div>
